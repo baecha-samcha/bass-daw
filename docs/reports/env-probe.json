@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-22T14:52:39.519Z",
+  "node": "v24.21.0",
+  "pnpm": "10.34.7",
+  "corepack": "0.36.0",
+  "os": "Linux 6.18.50+rpt-rpi-v8",
+  "distro": "Debian GNU/Linux 13 (trixie)",
+  "arch": "arm64",
+  "cpus": 4,
+  "cpuModel": "Raspberry Pi 4 Model B Rev 1.5",
+  "memTotalGiB": 7.64,
+  "memFreeGiB": 3.85,
+  "memAvailable": "MemAvailable:    4040824 kB",
+  "disk": "/dev/sda2       110G   28G   77G  27% /srv/storage",
+  "chromium": "Chromium 154.0.8037.57 built on Debian GNU/Linux 13 (trixie)",
+  "git": "git version 2.47.3",
+  "gitStatus": "12",
+  "gitHead": null,
+  "root": false
+}

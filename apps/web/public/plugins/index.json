@@ -1,0 +1,26 @@
+[
+  {
+    "file": "faultdemo.bdplugin",
+    "pluginId": "com.bassdaw.faultdemo",
+    "version": "1.0.0",
+    "role": "effect",
+    "name": "Fault Demo (diagnostic)",
+    "bundleSha256": "cc211c82f522dadea85bceebd5c01c1e73457fb6242dfbb1110c9bdf7693d4e4"
+  },
+  {
+    "file": "gain.bdplugin",
+    "pluginId": "com.bassdaw.gain",
+    "version": "1.0.0",
+    "role": "effect",
+    "name": "Sample Gain",
+    "bundleSha256": "8d8c4276ec84dfcf755d204cf0c66529a18cf4adf0e9ba97801d45f6ddaa649a"
+  },
+  {
+    "file": "oneshot.bdplugin",
+    "pluginId": "com.bassdaw.oneshot",
+    "version": "1.0.0",
+    "role": "instrument",
+    "name": "One-shot Sampler",
+    "bundleSha256": "c0a5417e0ffbd019893faf343e2bcad32d1bc0b55472010db991189908668d64"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "apiVersion": "1.0", "pluginId": "com.bassdaw.gain", "version": "1.0.0",
+  "role": "effect", "name": "Sample Gain", "vendor": "bass-daw samples",
+  "dsp": { "abi": "bass-daw-wasm-1", "sha256": "", "path": "dsp.wasm" },
+  "ui": { "path": "ui.html", "sha256": "" },
+  "channels": { "inputs": 2, "outputs": 2 },
+  "parameters": [{ "id": "gain", "name": "Gain", "unit": "linear", "min": 0, "max": 4, "default": 1, "scale": "linear", "steps": null, "automation": "sample", "smoothingMs": 5 }],
+  "articulations": ["normal"], "voiceExpressions": [],
+  "stateVersion": 1, "maxStateBytes": 1024, "maxMemoryPages": 1, "maxBlockFrames": 512,
+  "latencyFrames": 0, "tailFrames": 0, "permissions": [], "license": "CC0-1.0"
+}

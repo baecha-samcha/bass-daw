@@ -1,0 +1,39 @@
+{
+  "name": "bass-daw",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.34.7",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @bass-daw/web dev",
+    "dev:https": "pnpm --filter @bass-daw/web dev:https",
+    "build": "node scripts/build-plugins.mjs && pnpm --filter @bass-daw/web build",
+    "preview": "pnpm --filter @bass-daw/web preview",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "probe:env": "node scripts/probe-env.mjs",
+    "build:plugins": "node scripts/build-plugins.mjs",
+    "dev:api": "pnpm --filter @bass-daw/api dev",
+    "check:prod": "node scripts/check-prod-bundle.mjs",
+    "deploy": "pnpm build && node scripts/check-prod-bundle.mjs && wrangler deploy --config wrangler.jsonc"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.64.1",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-basic-ssl": "^2.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "fake-indexeddb": "6.2.6",
+    "fflate": "0.8.3",
+    "typescript": "7.0.2",
+    "vite": "8.3.5",
+    "vitest": "5.0.5",
+    "wabt": "1.0.39",
+    "wrangler": "4.152.0"
+  }
+}

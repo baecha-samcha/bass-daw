@@ -1,0 +1,14 @@
+{
+  "apiVersion": "1.0", "pluginId": "com.bassdaw.oneshot", "version": "1.0.0",
+  "role": "instrument", "name": "One-shot Sampler", "vendor": "bass-daw samples",
+  "dsp": { "abi": "bass-daw-wasm-1", "sha256": "", "path": "dsp.wasm" },
+  "ui": null,
+  "channels": { "inputs": 0, "outputs": 2 },
+  "parameters": [
+    { "id": "gain", "name": "Gain", "unit": "linear", "min": 0, "max": 4, "default": 1, "scale": "linear", "steps": null, "automation": "sample", "smoothingMs": 5 },
+    { "id": "rootPitch", "name": "Root pitch", "unit": "midi", "min": 0, "max": 127, "default": 60, "scale": "linear", "steps": 128, "automation": "block", "smoothingMs": 0 }
+  ],
+  "articulations": ["normal"], "voiceExpressions": [],
+  "stateVersion": 1, "maxStateBytes": 4096, "maxMemoryPages": 128, "maxBlockFrames": 512,
+  "latencyFrames": 0, "tailFrames": null, "permissions": ["read-selected-assets"], "license": "CC0-1.0"
+}

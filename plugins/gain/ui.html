@@ -1,0 +1,14 @@
+<!doctype html><html><body style="font:13px system-ui;background:#1f2229;color:#e8e6df;margin:8px">
+<label>Gain <input id="g" type="range" min="0" max="4" step="0.01" style="width:160px"></label> <span id="v"></span>
+<script>
+let port = null;
+addEventListener('message', (e) => {
+  if (e.data && e.data.type === 'bass-daw-connect' && e.ports[0] && !port) {
+    port = e.ports[0];
+    port.onmessage = (m) => { if (m.data.type === 'state') { const v = m.data.parameters.gain; g.value = v; document.getElementById('v').textContent = Number(v).toFixed(2); } };
+    port.postMessage({ type: 'hello', nonce: e.data.nonce });
+  }
+});
+const g = document.getElementById('g');
+g.oninput = () => { document.getElementById('v').textContent = Number(g.value).toFixed(2); port && port.postMessage({ type: 'param', id: 'gain', value: Number(g.value) }); };
+</script></body></html>

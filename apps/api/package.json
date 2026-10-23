@@ -1,0 +1,17 @@
+{
+  "name": "@bass-daw/api",
+  "version": "0.7.0",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "miniflare": "4.20260730.0"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs && node dist/local-server.mjs --port 8787 --state ../../tests/artifacts/api-state"
+  },
+  "dependencies": {
+    "@bass-daw/schemas": "workspace:*"
+  }
+}

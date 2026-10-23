@@ -1,0 +1,7 @@
+# 로컬 개발 전용 예시. 복사본 .dev.vars 는 gitignore 대상이다. 실제 값은 로컬에서 무작위로 생성해 넣는다.
+# (pnpm --filter @bass-daw/api dev 는 이 파일 없이도 실행마다 무작위 secret 을 메모리에서 생성한다)
+AUTH_MODE=fake
+ENVIRONMENT=development
+FAKE_AUTH_SECRET=replace-with-random-local-secret
+SIGNING_SECRET=replace-with-random-local-secret
+ALLOWED_ORIGINS=http://localhost:5173,http://localhost:4173

@@ -1,0 +1,68 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "ES2023",
+      "DOM",
+      "DOM.Iterable",
+      "WebWorker.ImportScripts"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": false,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "types": [
+      "node",
+      "vite/client"
+    ],
+    "paths": {
+      "@bass-daw/schemas": [
+        "./packages/schemas/src/index.ts"
+      ],
+      "@bass-daw/music-core": [
+        "./packages/music-core/src/index.ts"
+      ],
+      "@bass-daw/tab-engine": [
+        "./packages/tab-engine/src/index.ts"
+      ],
+      "@bass-daw/midi-engine": [
+        "./packages/midi-engine/src/index.ts"
+      ],
+      "@bass-daw/project-core": [
+        "./packages/project-core/src/index.ts"
+      ],
+      "@bass-daw/storage": [
+        "./packages/storage/src/index.ts"
+      ],
+      "@bass-daw/audio-engine": [
+        "./packages/audio-engine/src/index.ts"
+      ],
+      "@bass-daw/ui": [
+        "./packages/ui/src/index.ts"
+      ],
+      "@bass-daw/plugin-api": [
+        "./packages/plugin-api/src/index.ts"
+      ],
+      "@bass-daw/notation": [
+        "./packages/notation/src/index.ts"
+      ]
+    }
+  },
+  "include": [
+    "packages/*/src",
+    "apps/web/src",
+    "apps/api/src",
+    "apps/api/local",
+    "apps/api/test",
+    "tests",
+    "apps/web/vite.config.ts",
+    "vitest.config.ts",
+    "playwright.config.ts"
+  ]
+}

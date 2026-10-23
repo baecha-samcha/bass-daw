@@ -1,0 +1,11 @@
+{
+  "apiVersion": "1.0", "pluginId": "com.bassdaw.faultdemo", "version": "1.0.0",
+  "role": "effect", "name": "Fault Demo (diagnostic)", "vendor": "bass-daw samples",
+  "dsp": { "abi": "bass-daw-wasm-1", "sha256": "", "path": "dsp.wasm" },
+  "ui": null,
+  "channels": { "inputs": 2, "outputs": 2 },
+  "parameters": [{ "id": "mode", "name": "Fault (0 pass, 1 NaN, 2 trap)", "unit": "", "min": 0, "max": 2, "default": 0, "scale": "linear", "steps": 3, "automation": "block", "smoothingMs": 0 }],
+  "articulations": ["normal"], "voiceExpressions": [],
+  "stateVersion": 1, "maxStateBytes": 1024, "maxMemoryPages": 1, "maxBlockFrames": 512,
+  "latencyFrames": 0, "tailFrames": 0, "permissions": [], "license": "CC0-1.0"
+}

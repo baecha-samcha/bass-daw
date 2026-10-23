@@ -1,0 +1,52 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: corepack enable && corepack prepare pnpm@10.34.7 --activate
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+      - run: node scripts/check-prod-bundle.mjs   # production 번들에 fake auth / e2e hash 없음
+      - name: Browser smoke (Chromium, headless — not a device audio gate)
+        run: |
+          pnpm exec playwright install --with-deps chromium
+          CHROMIUM_PATH=$(node -e "console.log(require('@playwright/test').chromium.executablePath())") pnpm test:e2e
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-artifacts
+          path: |
+            tests/artifacts/e2e-results.json
+            test-results/
+  # 실제 workerd 런타임(Miniflare D1/R2 시뮬레이터)에서 API 계약 스위트. Pi(39-bit VA)에서는 실행 불가라 x86_64 에서만.
+  # 외부 계정·secret·Cloudflare 리소스를 쓰지 않는다(로컬 시뮬레이터만). 배포 단계 없음.
+  workerd-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: corepack enable && corepack prepare pnpm@10.34.7 --activate
+      - run: pnpm install --frozen-lockfile
+      - name: workerd smoke
+        run: node -e "const p=require.resolve('workerd/bin/workerd',{paths:[require.resolve('miniflare',{paths:['apps/api']})]});console.log(require('child_process').execFileSync(process.execPath,[p,'--version']).toString())"
+      - name: API contract on real workerd (fails instead of skipping if workerd is unavailable)
+        run: REQUIRE_WORKERD=1 pnpm vitest run apps/api/test/workerd.test.ts apps/api/test/contract-node.test.ts --reporter=verbose --reporter=json --outputFile=tests/artifacts/workerd-contract.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: workerd-contract
+          path: tests/artifacts/workerd-contract.json

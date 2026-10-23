@@ -34,7 +34,7 @@ test('editor drum pad mapping preview + range + PDF preserves project, plan, sav
  test.setTimeout(180000);await page.goto(BASE);await page.getByLabel('새 프로젝트 제목').fill('Drum export');await page.getByRole('button',{name:'새 프로젝트',exact:true}).click();await page.getByRole('button',{name:'+ Drums',exact:true}).click();
  await page.waitForFunction(()=> (window as any).__bassdaw.state().project.assets.length>0);
  await page.evaluate(()=>{const w=window as any,s=w.__bassdaw.state(),p=s.project,src=p.sources.find((x:any)=>x.kind==='drum'),clip=p.tracks[0].clips[0];s.run('drum hits',{type:'EditNotes',clipId:clip.id,ops:src.pads.map((p:any,i:number)=>({op:'add',collection:'hits',item:{id:`dh${i}`,tick:i*480,padId:p.id,velocity:25+i*13}}))});});
- await page.getByRole('button',{name:'지금 저장'}).click();await waitSaved(page);
+ await page.getByRole('button',{name:'복구본 저장'}).click();await waitSaved(page);
  const dbg=()=>page.evaluate(async()=>{const w=(window as any).__bassdaw;return {project:await w.projectHash(),plan:w.planHash().hash,seq:w.state().editSeq};});const before=await dbg();
  await page.getByRole('tab',{name:'악보',exact:true}).click();
  await expect(page.getByLabel('기보 악기 Kick')).toBeVisible();await expect(page.getByLabel('보표',{exact:true})).toHaveCount(0);

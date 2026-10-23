@@ -14,3 +14,5 @@
 Workers에 실제 배포한 뒤에는 HTTPS·COOP/COEP/CORP·crossOriginIsolated/SharedArrayBuffer·오디오 시작·프로젝트 파일 저장/열기·기보 렌더를 공개 주소에서 다시 검증해야 한다. 현재 자동 로컬 브라우저 결과를 공개 서비스 결과로 대신하지 않는다.
 
 초기 GitHub CI에서는 보존된 옛 클라우드 API의 실제 workerd 계약 4개가 500 응답으로 실패했다. 현재 배포되는 로컬 파일 앱과 별개이며 PASS로 바꾸지 않는다. 이후 기본 CI는 현재 앱과 Node 회귀를 실행하고, 은퇴한 workerd 계약은 `REQUIRE_WORKERD=1` 및 workflow_dispatch의 `legacy_cloud_contract`로 명시적으로 선택하도록 구분했다.
+
+최종 코드 `4ade338`은 공개 저장소 `main`으로 push했다. [GitHub CI](https://github.com/baecha-samcha/bass-daw/actions/runs/39895886787)는 성공했으며 단위207/브라우저35 통과, production 번들 검사 및 별도 Pi Wrangler dry-run도 통과했다. 현재 Worker용 Cloudflare 인증과 제안한 로컬 API token 파일은 미설정이므로 **실제 Workers 배포와 공개 사이트 검증은 미완료**다. 마지막 보고서 변경은 코드 변경 없이 별도 commit으로 반영한다.

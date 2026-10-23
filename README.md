@@ -33,7 +33,7 @@ pnpm typecheck                # TypeScript 7 (tsc)
 pnpm test                     # Vitest: 도메인·DSP·저장·엔진 (Node, fake-indexeddb)
 pnpm test:e2e                 # Playwright + 시스템 Chromium(/usr/bin/chromium), worker 1 (e2e 전용 빌드 + 로컬 API 자동 기동)
 node scripts/check-prod-bundle.mjs  # pnpm build 후: production 번들에 fake auth·e2e hash 없음 확인
-REQUIRE_WORKERD=1 pnpm vitest run apps/api/test/workerd.test.ts   # x86_64 전용: 실제 workerd 계약 스위트(Pi 불가)
+REQUIRE_WORKERD=1 pnpm vitest run apps/api/test/workerd.test.ts   # 과거 클라우드 API 수동 검증(x86_64), 현재 웹 앱 CI 범위 밖
 PERF=1 F02_MINUTES=30 pnpm vitest run tests/perf   # F02 부하 오프라인 측정(참고치)
 node scripts/probe-env.mjs    # 개발 환경 조사
 ```

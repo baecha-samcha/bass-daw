@@ -1,5 +1,11 @@
 name: ci
 on:
+  workflow_dispatch:
+    inputs:
+      legacy_cloud_contract:
+        description: Run retired cloud API workerd contracts (not used by the local-file app)
+        type: boolean
+        default: false
   pull_request:
   push:
     branches: [main]
@@ -32,6 +38,7 @@ jobs:
   # 실제 workerd 런타임(Miniflare D1/R2 시뮬레이터)에서 API 계약 스위트. Pi(39-bit VA)에서는 실행 불가라 x86_64 에서만.
   # 외부 계정·secret·Cloudflare 리소스를 쓰지 않는다(로컬 시뮬레이터만). 배포 단계 없음.
   workerd-contract:
+    if: github.event_name == 'workflow_dispatch' && inputs.legacy_cloud_contract
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:

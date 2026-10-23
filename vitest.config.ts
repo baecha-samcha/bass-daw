@@ -9,6 +9,8 @@ export default defineConfig({
   resolve: { alias },
   test: {
     include: ['packages/*/test/**/*.test.ts', 'apps/*/test/**/*.test.ts', 'tests/unit/**/*.test.ts', 'tests/perf/**/*.test.ts'],
+    // Retired cloud runtime is opt-in; the shipped app has no cloud API.
+    exclude: process.env.REQUIRE_WORKERD === '1' ? [] : ['apps/api/test/workerd.test.ts'],
     environment: 'node',
     pool: 'threads',
     maxWorkers: 2,

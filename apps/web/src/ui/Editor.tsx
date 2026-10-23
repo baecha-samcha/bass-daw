@@ -79,7 +79,7 @@ export function Editor() {
           </>
         )}
         <span className="mono" aria-label="재생 위치" data-testid="position">{fmtPos(maps.mm, tick)}</span>
-        <label className="row">BPM <input type="number" min={20} max={400} step={1} aria-label="템포" defaultValue={bpm} key={bpm} onBlur={(e) => setBpm(Number(e.target.value))} onKeyDown={(e) => { if (e.key === 'Enter') setBpm(Number((e.target as HTMLInputElement).value)); }} /></label>
+        <label className="row">BPM <input type="number" min={20} max={400} step={1} aria-label="템포" defaultValue={bpm} key={bpm} onBlur={(e) => setBpm(Number(e.target.value))} onKeyDown={(e) => { if (e.key === 'Enter') { const value = Number(e.currentTarget.value); e.currentTarget.blur(); setBpm(value); } }} /></label>
         <span className="mono dim">{meter.numerator}/{meter.denominator}</span>
         <button className={project.loop.enabled ? 'on' : ''} onClick={() => useApp.getState().run('Loop', { type: 'SetLoop', ...project.loop, enabled: !project.loop.enabled })} aria-pressed={project.loop.enabled}>⟲ 루프</button>
         <label className="row dim">마디 <input type="number" min={1} aria-label="루프 시작 마디" defaultValue={loopBars[0]} key={`ls${loopBars[0]}`} onBlur={(e) => { const s = maps.mm.barToTick(Math.max(1, Number(e.target.value))); if (s < project.loop.endTick) useApp.getState().run('Loop', { type: 'SetLoop', ...project.loop, startTick: s }); }} />–<input type="number" min={2} aria-label="루프 끝 마디" defaultValue={loopBars[1]} key={`le${loopBars[1]}`} onBlur={(e) => { const s = maps.mm.barToTick(Math.max(2, Number(e.target.value))); if (s > project.loop.startTick) useApp.getState().run('Loop', { type: 'SetLoop', ...project.loop, endTick: s }); }} /></label>

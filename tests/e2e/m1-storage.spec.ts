@@ -9,6 +9,14 @@ test('L01 + MVP-1 demo: create → 4 tracks → rename/tempo → undo/redo → s
   await page.getByLabel('새 프로젝트 제목').fill('L01 song');
   await page.getByRole('button', { name: '새 프로젝트' }).click();
   for (const b of ['+ Bass TAB', '+ Guitar TAB', '+ Keys', '+ Drums']) { await page.getByRole('button', { name: b }).click(); await page.waitForTimeout(200); }
+  // Adding a track also loads its kit asynchronously; finish setup before testing Undo.
+  await page.waitForFunction(() => {
+    const p = (window as any).__bassdaw.state().project;
+    return p.tracks.length === 4 && p.tracks.every((t: any) => {
+      const state = p.plugins.find((x: any) => x.instanceId === t.instrumentSlot)?.state;
+      return t.kind === 'drum' ? state?.pads?.length > 0 : state?.zones?.length > 0;
+    });
+  });
   await page.getByRole('button', { name: 'Bass 이름 변경' }).click();
   await page.getByLabel('트랙 이름').fill('Fretless');
   await page.getByLabel('트랙 이름').press('Enter');

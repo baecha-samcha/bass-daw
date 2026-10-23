@@ -1,11 +1,13 @@
 # 현재 운영: 로컬 .dawbae 파일
 
+현재 공개 주소: **https://daw.baecha.xyz**. 배포: `pnpm run deploy`(Wrangler 로그인 필요).
+
 2026-10-23 방향 전환: 프로젝트 저장/기기간 이동은 `.dawbae` 파일로 한다. 브라우저 IDB/OPFS는 복구용 사본이다. 활성 앱은 클라우드 API·로그인·D1·R2를 사용하지 않는다.
 
 - 파일 열기: 홈의 `파일 열기 (.dawbae)`. 이전 `.bassdaw` 호환.
 - 파일 저장: `파일 저장 (.dawbae)` / Ctrl+S. 다른 이름 저장: Ctrl+Shift+S.
 - 직접 파일 저장 미지원 시 다운로드를 사용하며 완료는 브라우저에서 확인한다. 원본 bytes 누락/디스크 실패 시 파일 저장 실패로 표시한다.
-- Workers 배포: `pnpm deploy`(루트 `wrangler.jsonc`), Cloudflare 계정 인증 필요. `.dawbae` 파일은 서버로 업로드하지 않는다.
+- Workers 배포: `pnpm run deploy`(루트 `wrangler.jsonc`), Cloudflare 계정 인증 필요. `.dawbae` 파일은 서버로 업로드하지 않는다.
 - 자세한 상태: `docs/reports/local-project-file-report.md`, `docs/reports/public-workers-deployment-report.md`.
 
 아래 내용은 **이전 클라우드 동기화 구현의 역사적 runbook**으로 보존하며 현재 앱 배포 절차가 아니다.

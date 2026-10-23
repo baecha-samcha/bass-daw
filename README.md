@@ -1,5 +1,7 @@
 # Bass TAB DAW (bass-daw)
 
+서비스: **https://daw.baecha.xyz** · [공개 배포 검증](docs/reports/public-workers-deployment-report.md)
+
 웹 DAW — 베이스·기타 TAB, 키보드, 드럼, 오디오/녹음 트랙을 편집하고 믹싱·자동화·WAV/MIDI·악보 출력을 지원한다.
 
 **프로젝트는 `.dawbae` 로컬 파일로 저장한다.** 프로젝트·원본 음원·녹음을 하나의 ZIP 기반 파일에 묶으며 다른 기기에서 다시 열 수 있다. 로그인·클라우드 동기화·D1·R2는 사용하지 않는다. 브라우저 자동 저장(IDB/OPFS)은 장애 복구용 사본이며 컴퓨터의 파일 저장과 구분한다. 이전 `.bassdaw` 파일도 열 수 있다.
@@ -65,10 +67,10 @@ node scripts/probe-env.mjs    # 개발 환경 조사
 
 ```bash
 pnpm exec wrangler login
-pnpm deploy
+pnpm run deploy
 ```
 
-`pnpm deploy`는 production 빌드와 번들 검사를 먼저 실행한다. 배포 계정에 `bass-daw` Worker가 생성되며
+`pnpm run deploy`는 production 빌드와 번들 검사를 먼저 실행한다. 배포 계정에 `bass-daw` Worker가 생성되며
 `workers.dev` 주소로 제공된다. `_headers`에 COOP/COEP/CORP를 설정해 SharedArrayBuffer와 AudioWorklet 조건을 유지한다.
 API token이나 OAuth 자격 증명은 저장소에 넣지 않는다. CI 검증은 기존 workflow로 실행하며 자동 배포는 별도로 설정해야 한다.
 

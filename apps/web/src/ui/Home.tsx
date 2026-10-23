@@ -41,7 +41,7 @@ export function Home() {
       </div>
       <div className="card row">
         <label className="row">제목 <input aria-label="새 프로젝트 제목" value={title} onChange={(e) => setTitle(e.target.value)} /></label>
-        <button className="primary" onClick={() => useApp.getState().newProject(title)}>새 프로젝트</button>
+        <button className="primary" disabled={!store && !storageError} onClick={() => useApp.getState().newProject(title)}>새 프로젝트</button>
         <button onClick={()=>void openFile()} disabled={!store}>파일 열기 (.dawbae)</button>
         <input ref={file} type="file" accept={PROJECT_ACCEPT} disabled={!store} aria-label="프로젝트 파일 열기" hidden onChange={(e) => { const f = e.target.files?.[0]; if (f) void useApp.getState().openProjectFile(f); e.target.value = ''; }} />
       </div>

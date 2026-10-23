@@ -53,7 +53,7 @@ export function Editor() {
     await engine.prepare(useApp.getState().project!);
   };
   const bpm = project.tempoMap[0].bpm;
-  const setBpm = (v: number) => { if (v >= 20 && v <= 400) useApp.getState().run('Tempo', { type: 'SetTempoMap', tempoMap: [{ ...project.tempoMap[0], bpm: v }, ...project.tempoMap.slice(1)] }); };
+  const setBpm = (v: number) => { const current = useApp.getState().project; if (current && v >= 20 && v <= 400 && current.tempoMap[0].bpm !== v) useApp.getState().run('Tempo', { type: 'SetTempoMap', tempoMap: [{ ...current.tempoMap[0], bpm: v }, ...current.tempoMap.slice(1)] }); };
   const meter = project.meterMap[0];
   const loopBars = [maps.mm.tickToBarBeat(project.loop.startTick).bar, maps.mm.tickToBarBeat(project.loop.endTick).bar];
 

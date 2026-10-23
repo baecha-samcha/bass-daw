@@ -59,6 +59,6 @@ test('legacy .bassdaw opens and corrupt .dawbae is rejected without replacing an
  await mockDisk(page);await newProject(page,'Legacy');await page.getByRole('button',{name:'파일 저장 (.dawbae)',exact:true}).click();await expect(page.getByTestId('file-status')).toHaveText('파일 저장됨');
  const bytes=Buffer.from(await page.evaluate(async()=>[...new Uint8Array(await (window as any).disk.saved.arrayBuffer())]));
  await page.getByRole('button',{name:'프로젝트 목록',exact:true}).click();await page.getByLabel('프로젝트 파일 열기',{exact:true}).setInputFiles({name:'old.bassdaw',mimeType:'application/zip',buffer:bytes});await expect(page.getByLabel('프로젝트 제목',{exact:true})).toHaveValue('Legacy');
- await page.getByRole('button',{name:'프로젝트 목록',exact:true}).click();const count=await page.locator('tbody tr').count();
+ await page.getByRole('button',{name:'프로젝트 목록',exact:true}).click();await expect(page.locator('tbody tr')).toHaveCount(2);const count=await page.locator('tbody tr').count();
  await page.getByLabel('프로젝트 파일 열기',{exact:true}).setInputFiles({name:'broken.dawbae',mimeType:'application/zip',buffer:Buffer.from('not a zip')});await expect(page.locator('.toast.error')).toContainText('Import refused');expect(await page.locator('tbody tr').count()).toBe(count);
 });

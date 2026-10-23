@@ -26,6 +26,7 @@ jobs:
       - run: node scripts/check-prod-bundle.mjs   # production 번들에 fake auth / e2e hash 없음
       - name: Browser smoke (Chromium, headless — not a device audio gate)
         run: |
+          sudo apt-get update && sudo apt-get install -y poppler-utils
           pnpm exec playwright install --with-deps chromium
           CHROMIUM_PATH=$(node -e "console.log(require('@playwright/test').chromium.executablePath())") pnpm test:e2e
       - uses: actions/upload-artifact@v4

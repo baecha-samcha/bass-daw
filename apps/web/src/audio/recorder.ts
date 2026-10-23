@@ -124,7 +124,8 @@ export class Recorder {
     } else if (m.type === 'stopped') {
       if (this.forcedStop) return; // 장치 제거 등으로 이미 강제 확정 중
       this.closeSegment();
-      void this.writing.then(() => this.finalize());
+      // A quota/IO stop preserves the recovery journal; its ack must not auto-commit it.
+      void this.writing.then(() => this.journal?.state === 'recoverable' ? undefined : this.finalize());
     }
   }
 

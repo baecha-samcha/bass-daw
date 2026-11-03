@@ -1,6 +1,6 @@
-# Bass TAB DAW (bass-daw)
+# Bass TAB DAW
 
-서비스: **https://daw.baecha.xyz** · [공개 배포 검증](docs/reports/public-workers-deployment-report.md)
+브라우저에서 베이스·기타 TAB, 키보드, 드럼과 오디오 트랙을 편집하는 음악 제작 앱입니다. 믹싱·자동화와 WAV·MIDI·악보 출력을 지원합니다. [웹 앱 열기](https://daw.baecha.xyz)에서 시작하고, 작업은 `.dawbae` 파일로 저장해 다른 기기로 옮길 수 있습니다.
 
 웹 DAW — 베이스·기타 TAB, 키보드, 드럼, 오디오/녹음 트랙을 편집하고 믹싱·자동화·WAV/MIDI·악보 출력을 지원한다.
 
@@ -15,18 +15,18 @@
 
 구현/검증: [로컬 파일 저장 보고서](docs/reports/local-project-file-report.md), [드럼 악보 보고서](docs/reports/drum-score-export-report.md). 실제 Chromebook·프린터 검증은 별도다.
 
-## 빠른 시작 (Raspberry Pi 개발 서버)
+## 로컬 개발 시작
 
 ```bash
-# pnpm 은 corepack 으로(전역 설치 없이): ~/.local/bin/pnpm shim 또는 `corepack pnpm@10.34.7`
+# pnpm 10.34.7을 사용합니다. Corepack 환경에서는 corepack pnpm@10.34.7로 실행할 수 있습니다.
 pnpm install
-pnpm dev            # http://<pi>:5173  (localhost 는 secure context)
-pnpm dev:https      # https://<pi>:5173 자체 서명 인증서(Chromebook 원격 접속용, 경고 수락 필요)
-pnpm build && pnpm preview   # 프로덕션 빌드 + PWA 서비스워커, http://<pi>:4173
+pnpm dev            # 로컬 개발 서버: http://localhost:5173
+pnpm dev:https      # 다른 기기에서 접속할 때 사용할 자체 서명 HTTPS 개발 서버
+pnpm build && pnpm preview   # 프로덕션 빌드 + PWA 서비스워커, http://localhost:4173
 ```
 
 - 진단 페이지(MVP-0): `#/diagnostics`
-- Chromebook 에서 Pi 로 접속할 때 AudioWorklet·마이크·서비스워커는 **secure context** 가 필요하다. `pnpm dev:https`(자체 서명) 또는 사용자가 선택한 HTTPS 터널을 쓴다. 포트 공개·터널 계정은 만들지 않았다(docs/reports/MVP-0-report.md).
+- Chromebook 에서 Pi 로 접속할 때 AudioWorklet·마이크·서비스워커는 **secure context** 가 필요하다. `pnpm dev:https`(자체 서명) 또는 사용자가 선택한 HTTPS 터널을 쓴다. 개발 서버의 포트 공개와 HTTPS 터널은 사용하는 환경에 맞게 별도로 설정해야 합니다.
 
 ## 검증 명령
 
